@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Printzoo — Delivery Partner</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="phone">
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <div class="tb">🛵</div>
+    <div><b>New order assigned!</b><br><small>₹42 payout · 1.2 km pickup</small></div>
+  </div>
+
+  <!-- ============ LOGIN ============ -->
+  <div class="screen active" id="s-login" style="background:linear-gradient(180deg,var(--red) 0%,var(--red-dark) 45%,var(--bg) 45%)">
+    <div class="login-wrap" style="background:transparent;padding-top:10px">
+      <div class="logo-badge">⚡</div>
+      <div class="login-title">PRINTZOO</div>
+      <div class="login-sub">Delivery Partner Portal</div>
+      <div class="login-card">
+        <div class="field"><label>Mobile Number</label><input type="tel" placeholder="+91 98765 43210" value="+91 98765 43210"></div>
+        <div class="field"><label>Password</label><input type="password" placeholder="••••••••" value="password"></div>
+        <button class="btn btn-red" onclick="signIn()">Sign In & Go Online ⚡</button>
+        <div class="link">Forgot password?</div>
+      </div>
+      <div style="text-align:center;margin-top:auto;padding:18px 0 6px;font-size:11.5px;color:var(--muted);font-weight:600">Earn up to ₹25,000/month with Printzoo 🚀</div>
+    </div>
+  </div>
+
+  <!-- ============ HOME ============ -->
+  <div class="screen" id="s-home">
+    <div class="app-header">
+      <div class="hdr-row">
+        <div class="hdr-logo"><div class="bolt">⚡</div>PRINTZOO</div>
+        <div class="role-tag">🛵 Delivery</div>
+      </div>
+      <div class="online-pill">
+        <div><div class="lbl" id="onlineLbl">You're Online 🟢</div><div class="sub" id="onlineSub">Receiving orders near Anna Nagar</div></div>
+        <button class="switch on" id="sw" onclick="toggleOnline()"></button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="stat-grid">
+        <div class="stat"><div class="icon" style="background:var(--yellow-soft)">💰</div><div class="val">₹486</div><div class="lbl">Today's Earnings</div></div>
+        <div class="stat"><div class="icon" style="background:var(--red-soft)">📦</div><div class="val">7</div><div class="lbl">Orders Delivered</div></div>
+        <div class="stat"><div class="icon" style="background:#E8ECFF">⭐</div><div class="val">4.9</div><div class="lbl">Rating</div></div>
+        <div class="stat"><div class="icon" style="background:var(--green-soft)">🎯</div><div class="val">98%</div><div class="lbl">Acceptance</div></div>
+      </div>
+
+      <div class="banner" style="margin-top:18px">
+        <span class="tag">⚡ PRINTZOO FAST</span>
+        <h3>Lunch rush is ON! 🍱</h3>
+        <p>Higher payouts on orders between 12–2 PM. Stay online!</p>
+        <div class="chips"><span class="chip">🕐 Peak 12–2 PM</span><span class="chip">💸 +₹15 bonus/order</span></div>
+      </div>
+
+      <div class="section-title"><span class="tick"></span>Active Orders</div>
+      <div class="order-card" data-order-id="PZ-2847" onclick="go('s-order')">
+        <div class="oc-top"><div class="oc-id">#PZ-2847 <span>· 2:42 PM</span></div><span class="pill pickup">GO TO PICKUP</span></div>
+        <div class="oc-route">
+          <div class="route-line"><div class="dot"></div><div class="line-v"></div><div class="dot cust"></div></div>
+          <div style="flex:1">
+            <div class="oc-place">Printzoo Point — Anna Nagar 🖨️</div><div class="oc-addr">Shop 4, 12th Main Road</div>
+            <div style="height:8px"></div>
+            <div class="oc-place">Rahul K. 🏠</div><div class="oc-addr">88, 2nd Cross St, Anna Nagar</div>
+          </div>
+        </div>
+        <div class="oc-meta"><span><b>Payout</b>₹42</span><span><b>Distance</b>2.4 km</span><span><b>Items</b>1 parcel</span></div>
+        <div class="oc-actions"><button class="btn-sm call">📞 Call Shop</button><button class="btn-sm go">Navigate →</button></div>
+      </div>
+
+      <div class="order-card" data-order-id="PZ-2849" onclick="go('s-order')">
+        <div class="oc-top"><div class="oc-id">#PZ-2849 <span>· 2:51 PM</span></div><span class="pill new">NEW</span></div>
+        <div class="oc-route">
+          <div class="route-line"><div class="dot"></div><div class="line-v"></div><div class="dot cust"></div></div>
+          <div style="flex:1">
+            <div class="oc-place">Printzoo Point — Kilpauk 🖨️</div><div class="oc-addr">21, EVR Periyar Salai</div>
+            <div style="height:8px"></div>
+            <div class="oc-place">Meera S. 🏠</div><div class="oc-addr">14, Poonamallee High Rd</div>
+          </div>
+        </div>
+        <div class="oc-meta"><span><b>Payout</b>₹55</span><span><b>Distance</b>3.8 km</span><span><b>Items</b>2 parcels</span></div>
+        <div class="oc-actions"><button class="btn-sm call" style="background:var(--red-soft);color:var(--red)" onclick="event.stopPropagation()">✕ Reject</button><button class="btn-sm go" onclick="event.stopPropagation();acceptOrder(this)">✓ Accept Order</button></div>
+      </div>
+
+      <div class="section-title"><span class="tick"></span>Completed Today</div>
+      <div class="order-card" style="padding:14px 18px">
+        <div class="oc-top" style="margin:0"><div class="oc-id">#PZ-2811 <span>· Delivered 1:58 PM</span></div><span class="pill done">✓ DONE</span></div>
+      </div>
+      <div class="order-card" style="padding:14px 18px">
+        <div class="oc-top" style="margin:0"><div class="oc-id">#PZ-2805 <span>· Delivered 1:30 PM</span></div><span class="pill done">✓ DONE</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ORDER DETAIL ============ -->
+  <div class="screen" id="s-order">
+    <div class="app-header">
+      <div class="hdr-row">
+        <div class="hdr-logo" style="cursor:pointer" onclick="go('s-home')"><div class="bolt">←</div>Order #PZ-2847</div>
+        <div class="role-tag">2:42 PM</div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="banner" style="display:flex;justify-content:space-between;align-items:center">
+        <div><span class="tag">STEP 1 OF 2</span><h3 style="margin-top:10px">Pickup from Shop 🖨️</h3><p>Show OTP to shop keeper to collect parcel</p></div>
+        <div style="font-size:44px">📦</div>
+      </div>
+
+      <div class="order-card" style="margin-top:16px">
+        <div class="oc-top"><div class="oc-id">Printzoo Point — Anna Nagar</div></div>
+        <div class="oc-addr">Shop 4, 12th Main Road, Anna Nagar, Chennai 600040<br>📞 +91 98410 22334</div>
+        <div class="oc-meta"><span><b>Order value</b>₹186</span><span><b>Payment</b>✅ Paid</span><span><b>Parcel</b>Print docs ×25</span></div>
+      </div>
+
+      <div class="section-title"><span class="tick"></span>Enter Pickup OTP</div>
+      <div style="background:#fff;border-radius:20px;padding:20px;box-shadow:var(--shadow)">
+        <div style="text-align:center;font-size:12.5px;color:var(--muted);font-weight:600">Ask shop keeper for the 4-digit code</div>
+        <div class="otp-box"><input maxlength="1" value="7"><input maxlength="1" value="3"><input maxlength="1" value="9"><input maxlength="1" value="2"></div>
+        <button class="btn btn-yellow" onclick="pickedUp()">✓ Confirm Pickup</button>
+      </div>
+
+      <div class="section-title"><span class="tick"></span>Customer Drop</div>
+      <div class="order-card" style="opacity:.75">
+        <div class="oc-top"><div class="oc-id">Rahul K. 🏠</div><span class="pill deliver">AFTER PICKUP</span></div>
+        <div class="oc-addr">88, 2nd Cross Street, Anna Nagar, Chennai 600040<br>📞 +91 90031 45678 · "Leave at door"</div>
+        <div class="oc-actions"><button class="btn-sm call">📞 Call Customer</button><button class="btn-sm go">🗺️ Navigate</button></div>
+      </div>
+
+      <button class="btn btn-red" style="margin-top:8px" onclick="delivered()">🏁 Mark as Delivered (Enter drop OTP)</button>
+    </div>
+  </div>
+
+  <!-- ============ EARNINGS ============ -->
+  <div class="screen" id="s-earn">
+    <div class="app-header">
+      <div class="hdr-row"><div class="hdr-logo"><div class="bolt">💰</div>Earnings</div><div class="role-tag">This Week</div></div>
+    </div>
+    <div class="content">
+      <div class="banner">
+        <span class="tag">⚡ WEEKLY SUMMARY</span>
+        <h3 style="font-size:30px;margin-top:10px">₹2,847</h3>
+        <p>Mon 22 – Sun 28 Sep · 54 orders</p>
+        <div class="chips"><span class="chip">🎯 Goal ₹3,000 · 95%</span><span class="chip">🔥 6-day streak</span></div>
+      </div>
+      <div class="section-title"><span class="tick"></span>Day-wise Breakdown</div>
+      <div class="order-card" style="padding:16px 18px"><div class="earn-row" style="border:none;padding:0 0 10px"><span><b style="color:var(--muted);font-size:11.5px">SUN 28</b><br>🖨️ 9 orders · 31 km</span><b style="color:var(--green)">+₹486</b></div></div>
+      <div class="order-card" style="padding:16px 18px"><div class="earn-row" style="border:none;padding:0 0 10px"><span><b style="color:var(--muted);font-size:11.5px">SAT 27</b><br>🖨️ 11 orders · 38 km</span><b style="color:var(--green)">+₹612</b></div></div>
+      <div class="order-card" style="padding:16px 18px"><div class="earn-row" style="border:none;padding:0 0 10px"><span><b style="color:var(--muted);font-size:11.5px">FRI 26</b><br>🖨️ 8 orders · 27 km</span><b style="color:var(--green)">+₹438</b></div></div>
+      <div class="order-card" style="padding:16px 18px"><div class="earn-row" style="border:none;padding:0 0 10px"><span><b style="color:var(--muted);font-size:11.5px">THU 25</b><br>🖨️ 10 orders · 33 km</span><b style="color:var(--green)">+₹571</b></div></div>
+      <div class="section-title"><span class="tick"></span>Incentives</div>
+      <div class="order-card" style="border:1.5px dashed var(--yellow);background:var(--yellow-soft)">
+        <div style="display:flex;justify-content:space-between;align-items:center"><div><b style="font-size:13.5px;color:var(--navy)">🏆 Weekend Warrior</b><div style="font-size:11.5px;color:#8a7400;font-weight:600;margin-top:3px">Complete 15 orders this weekend → ₹200 bonus</div></div><b style="color:var(--red)">9/15</b></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PROFILE ============ -->
+  <div class="screen" id="s-prof">
+    <div class="app-header">
+      <div class="hdr-row"><div class="hdr-logo"><div class="bolt">🛵</div>My Profile</div><div class="role-tag">⭐ 4.9</div></div>
+    </div>
+    <div class="content">
+      <div class="profile-head">
+        <div class="avatar">🧑🏽‍🦱</div>
+        <div><b style="font-size:16.5px">Arun Prakash</b><div style="font-size:12px;color:#C9CCE0;font-weight:600;margin-top:3px">DL-4471 · TN-10 AU 5544</div><div style="margin-top:7px"><span style="background:var(--yellow);color:var(--navy);font-size:10px;font-weight:800;padding:4px 10px;border-radius:99px">🥇 GOLD PARTNER</span></div></div>
+      </div>
+      <div class="section-title"><span class="tick"></span>Account</div>
+      <div class="menu-item"><div class="mi" style="background:var(--red-soft)">📄</div>Documents & KYC<span class="arr">›</span></div>
+      <div class="menu-item"><div class="mi" style="background:var(--yellow-soft)">🏦</div>Bank Details<span class="arr">›</span></div>
+      <div class="menu-item"><div class="mi" style="background:#E8ECFF">📊</div>Performance Stats<span class="arr">›</span></div>
+      <div class="menu-item"><div class="mi" style="background:var(--green-soft)">🎧</div>Help & Support<span class="arr">›</span></div>
+      <button class="btn btn-outline" style="margin-top:14px;color:var(--red);border-color:var(--red-soft)" onclick="go('s-login')">⏻ Log Out</button>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav" id="navbar" style="display:none">
+    <div class="nav-item active" data-t="s-home" onclick="nav(this)"><span class="ic">🏠</span>Home</div>
+    <div class="nav-item" data-t="s-order"><span class="ic badge-dot">📦</span>Orders</div>
+    <div class="nav-item" data-t="s-earn" onclick="nav(this)"><span class="ic">💰</span>Earnings</div>
+    <div class="nav-item" data-t="s-prof" onclick="nav(this)"><span class="ic">👤</span>Profile</div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
